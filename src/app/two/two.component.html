@@ -1,0 +1,63 @@
+<!-- TEMPLATE DRIVEN              REACTIVE DRIVEN -->
+
+<!-- <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)"></form> -->
+<form #myForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="firstNameEle">First Name</label>
+        <input type="text" class="form-control" id="firstNameEle" ngModel name="firstName" required #eaFn="ngModel">
+        <span class="text-danger" *ngIf="!eaFn.touched">First Name is required</span>
+    </div>
+    <div class="form-group">
+        <label for="lastNameEle">Last Name</label>
+        <input type="text" class="form-control" id="lastNameEle" ngModel name="lastName" pattern="(?=.*\d)(?=.*[a-z])
+        (?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" required>
+    </div>
+    <div class="form-group">
+        <label for="emailEle">Email address</label>
+        <input type="text" class="form-control" id="emailEle" ngModel name="emailId">
+    </div>
+    <div class="form-group">
+        <label for="contactEle">Contact number</label>
+        <input type="text" class="form-control" id="contactEle" ngModel name="contactNo" required minlength="10"
+         #eaCont="ngModel">
+         
+         <!-- <span class="text-danger" *ngIf="!eaCont?.valid && eaCont?.touched">
+            <ng-container *ngIf="eaCont?.errors?.['required']">Contact Number is required</ng-container>
+            <ng-container *ngIf="eaCont?.errors?.['minlength']">Contact Number length should be 10
+                <span>Please add {{eaCont?.errors?.['minlength']?.requiredLength - eaCont?.errors?.['minlength']?.
+                    actualLength}} more numbers</span>
+            </ng-container>
+         </span> -->
+
+
+         <!-- second way -->
+<!--          
+         <span class="text-danger" *ngIf="!myForm.controls['contactNo']?.valid && myForm.controls['contactNo']?.touched">
+            <ng-container *ngIf="myForm.controls['contactNo']?.errors?.['required']">Contact Number is required</ng-container>
+            <ng-container *ngIf="myForm.controls['contactNo']?.errors?.['minlength']">COntact Number length should be 10
+                <span>Please add {{myForm.controls['contactNo']?.errors?.['minlength'].requiredLength - myForm.controls
+                    ['contactNo']?.errors?.['minlength'].actualLength}} more numbers</span>
+            </ng-container>
+         </span> -->
+    </div>
+    <!-- <button type="submit" class="btn bn-primary" (click)="onSubmit (myForm)">Submit</button> -->
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<!-- 
+{
+    firstName : '',
+    lastName : '',
+    emailId : '',
+    contactNo : ''
+} -->
+
+
+
+<form #myForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="name">First Name</label>
+        <input type="text"  >
+    </div>
+</form>

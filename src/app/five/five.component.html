@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group">
+                            <label>User Name</label>
+                            <input type="text" class="form-control" name="user"  formControlName="user">
+                            <br>
+                            <!-- <span style="color:red;" *ngIf="user.invalid && user.touched">This field is required</span> -->
+                            <!-- <span style="color:red;" *ngIf="loginForm.get('user').control.invalid && loginForm.get('user').control.touched">This field is required</span> -->
+                            <small style="color: red;" *ngIf="!loginForm.get('user').valid && loginForm.get('user').touched">This field is required</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label> 
+                            <input type="text" class="form-control" name="pass" formControlName="pass">
+                            <br>
+                            <span style="color: red;" *ngIf="!loginForm.get('pass').valid && loginForm.get('pass').touched">This field is required</span>
+                        </div>
+                        <button [disabled]="loginForm.invalid" class="btn btn-primary">Login</button>
+                    </form>                                         
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

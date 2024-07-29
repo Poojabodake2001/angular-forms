@@ -1,0 +1,72 @@
+<form [formGroup]="reactFormObj" (ngSubmit)="onSubmit()">
+    <div formGroupName="fullName">
+        <div class="form-group">
+            <label for="firstNameEle">First Name</label>
+            <input type="text" class="form-control" id="firstNameEle" name="firstName" formControlName="firstName">
+            <span class="text-danger" *ngIf="!reactFormObj.get('fullName.firstName').valid && 
+            reactFormObj.get('fullName.firstName').touched">First Name is required</span>
+
+        </div>
+        <div class="form-group">
+            <label for="lastNameEle">Last Name</label>
+            <input type="text" class="form-control" id="lastNameEle" name="lastName" formControlName="lastName">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="emailEle">Email address</label>
+        <input type="text" class="form-control" id="emailEle" name="emailId" formControlName="emailId">
+        <span class="text-danger" *ngIf="reactFormObj.get('emailId').pending">Checking email uniqueness...
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921" class="
+            my-email-loader" alt="">
+        </span>
+        <span class="text-danger" *ngIf="!reactFormObj.get('emailId').valid && reactFormObj.get('emailId').touched
+        && !reactFormObj.get('emailId').pending">
+            <ng-container *ngIf="reactFormObj.get('emailId').errors.required">Email id is required</ng-container>
+            <ng-container *ngIf="reactFormObj.get('emailId').errors.noSpace">Email id is invalid as it contains space in
+                it</ng-container>
+            <ng-container *ngIf="reactFormObj.get('emailId').errors.uniqueEmail">Email id is already taken. Please
+                choose another Email id
+            </ng-container>
+        </span>
+    </div>
+
+    <div class="form-group">
+        <label for="contactEle">Contact number</label>
+        <input type="text" class="form-control" id="contactEle" name="contactNo" formControlName="contactNo">
+        <span class="text-danger" *ngIf="!reactFormObj.get('contactNo').valid && reactFormObj.get('contactNo').touched">
+
+            <ng-container *ngIf="reactFormObj.get('contactNo')?.errors?.['required']">Contact Number is
+                required</ng-container>
+            <ng-container *ngIf="reactFormObj.get('contactNo')?.errors?.['minlength']">Contact Number is should be 10
+                <span>
+                    please add {{reactFormObj.get('contactNo')?.errors?.['minlength']?.requiredLength -
+                    reactFormObj.get('contactNo')?.
+                    errors?.['minlength']?.actualLength}} more number
+                </span>
+            </ng-container>
+        </span>
+    </div>
+
+    <div formArrayName="knowLanguages">
+        <label>known Languages</label>
+        <div class="input-group" *ngFor="let lang of reactFormObj.get('knowLanguages').controls; let i = index">
+            <input type="text" class="form-control" placeholder="Enter Languages" [formControlName]="i">
+            <div class="input-group-append" *ngIf="reactFormObj.get('knowLanguages').controls.length === i + 1">
+                <button class="btn btn-outline-secondary" type="button" (click)="addNewLanguages()">
+                    <i class="fa fa-plus"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="button" class="btn btn-info" (click)="addDefaultEmail()">Add Default Email</button>
+    <button type="button" class="btn btn-info" (click)="setDefaultValues()">Set Form Values</button>
+</form>
+
+<!-- 
+{
+    firstName : '',
+    lastName : '',
+    emailId : '',
+    contactNo : ''
+} -->

@@ -1,0 +1,11 @@
+<form [formGroup]="myForm" (ngSubmit)="submitForm()" class="mt-5">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" name="name" id="name" formControlName="name">
+    <div formArrayName="skills" *ngFor="let skill of skillsArray.controls; let i = index">
+        <label for="skills">Skills:</label>
+        <input type=text class="form-control my-2" [formControlName]="i">
+        <button class="btn btn-outline-primary mt-3" type="button" (click)="addSkills(i)" *ngIf="i == currentIndex">Add Skill</button>
+    </div>
+</form>
+
+

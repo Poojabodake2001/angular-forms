@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <form #myForm="ngForm" (ngSubmit)="onSubmit()" class="border border-primary p-5 mt-3">
+        <div ngModelGroup="fullname">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" ngModel name="firtName" #fname="ngModel" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" ngModel name="lastName" #lName="ngModel" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>email</label>
+          <input type="text" ngModel name="email" #email="ngModel" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Contact</label>
+          <input type="text" ngModel name="contact" #contact="ngModel" class="form-control" required minlength="10"
+            maxlength="10">
+          <span *ngIf="contact.errors?.['required']" class="text-danger">Contact is required</span>
+          <span *ngIf="contact.errors?.['minlength']" class="text-danger">Contact length has to be atleast 10. put
+            {{contact.errors?.['minlength'].requiredLength - contact.errors?.['minlength'].actualLength}} more
+            number</span>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary"> Submit</button>
+        </div>
+        <button type="button" (click)="setVal()">Set Value</button>
+        <button type="button" (click)="patchValToEmail()">Change email</button>
+      </form>
+    </div>
+    <div class="col-sm-6">
+      <table class="table table-dark mt-4 p-4">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Contact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of userList">
+            <td>{{user.fullname.firtName}}</td>
+            <td>{{user.fullname.lastName}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.contact}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
